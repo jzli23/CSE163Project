@@ -5,8 +5,10 @@ import matplotlib.pyplot as plt
 
 sns.set()
 
+
 def organize_ratings(ratings):
-    ratings = ratings[['subgroup', 'grade', 'samplesize', 'approve', 'disapprove']]
+    ratings = ratings[['subgroup', 'grade', 'samplesize', 
+                       'approve', 'disapprove']]
     ratings = ratings.sort_index()
 
     # Only care about polls that scored well and dealt with Adults
@@ -26,7 +28,7 @@ def organize_ratings(ratings):
     return ratings[['samplesize', 'approve', 'disapprove']].loc['2016-1-20':'2020-4-15']
 
 
-def organize_tweets(tweets):
+def organize_tweets_ratings(tweets):
     tweets['count'] = 1
     tweets = tweets[['retweets', 'favorites', 'count']]
 
@@ -40,12 +42,11 @@ def organize_tweets(tweets):
 def create_plots(approval_ratings):
     approval_ratings = approval_ratings.resample('W').mean()
 
-    fig, [[ax1, ax2, ax3], [ax4, ax5, ax6]] = plt.subplots(nrows=2, ncols=3, figsize=(20,10))
+    fig, [[ax1, ax2, ax3], [ax4, ax5, ax6]] = plt.subplots(nrows=2, ncols=3, figsize=(20, 10))
 
     sns.regplot(x='approve', y='count', data=approval_ratings, ax=ax1)
     ax1.set(xlabel='Avg Approval Rating (Week)', ylabel='Weekly Tweet Count', title='Approval Ratings per Week vs. Weekly Tweet Count',
             xlim=(35, 45), ylim=(0, 200))
-    
 
     sns.regplot(x='approve', y='fav_avg', data=approval_ratings, ax=ax2)
     ax2.set(xlabel='Avg Approval Rating (Week)', ylabel='Weekly Tweet Favorites', title='Approval Ratings per Week vs. Weekly Tweet Favorites',
@@ -70,6 +71,12 @@ def create_plots(approval_ratings):
     fig.savefig('test.png')
 
 
+def organize_tweets_language(tweets):
+    tweets = tweets.loc['2016-1-20':]
+    print(tweets[tweets['content'] == '@CNNPolitics'])
+
+
+
 def main():
     print('cool')
 
@@ -81,13 +88,13 @@ def main():
                            index_col='enddate', parse_dates=True)
 
     ratings = organize_ratings(ratings)
-    print(tweets)
-
-    tweets = organize_tweets(tweets)
-
-    approval_ratings = tweets.join(ratings).dropna()
-
+    tweets_ratings = organize_tweets_ratings(tweets)
+    approval_ratings = tweets_ratings.join(ratings).dropna()
     create_plots(approval_ratings)
+
+    organize_tweets_language(tweets)
+
+
 
 if __name__ == '__main__':
     main()
