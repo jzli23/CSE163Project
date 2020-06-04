@@ -76,7 +76,7 @@ def create_grammarplot(tweets):
     ax.set(xlabel='Part of Speech Percentage', ylabel='Kernal Density',
            title='Distribution of Grammar Usage in Tweets')
 
-    fig.savefig('grammar.png')
+    fig.savefig('CSE163Project/images/grammar.png')
 
     # To make the charactercount plot
     fig, ax = plt.subplots(1, figsize=(20, 10))
@@ -84,7 +84,7 @@ def create_grammarplot(tweets):
     ax.set(xlabel='Tweet Character Count', ylabel='Kernal Density',
            title='Distribution of Character Counts in Tweets')
 
-    fig.savefig('charactercount.png')
+    fig.savefig('CSE163Project/images/charactercount.png')
 
     # To make the comparisons plot
     tweets = tweets.resample('w').mean()
@@ -97,8 +97,8 @@ def create_grammarplot(tweets):
             ylabel='Mean Favorites per Week',
             title='Mean Noun Usage Percent vs Mean Favorites per Week')
 
-    sns.regplot(x='character count', y='favorites', marker='+', scatter_kws={"s": 10},
-                data=tweets, ax=ax2)
+    sns.regplot(x='character count', y='favorites', marker='+',
+                scatter_kws={"s": 10}, data=tweets, ax=ax2)
     ax2.set(xlabel='Mean Character Count per Week',
             ylabel='Mean Favorites per Week',
             title='Mean Character Count vs Mean Favorites per Week')
@@ -115,8 +115,8 @@ def create_grammarplot(tweets):
             ylabel='Mean Retweets per Week',
             title='Mean Noun Usage Percent vs Mean Retweets per Week')
 
-    sns.regplot(x='character count', y='retweets', marker='+', scatter_kws={"s": 10},
-                data=tweets, ax=ax5)
+    sns.regplot(x='character count', y='retweets', marker='+',
+                scatter_kws={"s": 10}, data=tweets, ax=ax5)
     ax5.set(xlabel='Mean Character Count per Week',
             ylabel='Mean Retweets per Week',
             title='Mean Character Count vs Mean Retweets per Week')
@@ -127,7 +127,7 @@ def create_grammarplot(tweets):
             ylabel='Mean Retweets per Week',
             title='Mean Proper Noun Usage Percent vs Mean Retweets per Week')
 
-    fig.savefig('comparisons.png')
+    fig.savefig('CSE163Project/images/comparisons.png')
 
 
 def machine_learn_tweets(tweets):

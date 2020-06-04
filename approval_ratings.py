@@ -89,7 +89,7 @@ def create_plots(approval_ratings):
             title='Disapproval Ratings per Week vs. Weekly Tweet Retweets',
             xlim=(40, 60), ylim=(5000, 35000))
 
-    fig.savefig('approval.png')
+    fig.savefig('CSE163Project/images/approval.png')
 
 
 def main():

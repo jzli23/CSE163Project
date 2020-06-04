@@ -20,12 +20,13 @@
 5. Running these 3 Python files should result in the following images being produced in your directory:
     1. approval_ratings.py produces:
         1. approval.png
-    2. language.py
+    2. mentions.py
+        1. people_of_interest.png
+    3. language.py
         1. grammar.png
         2. wordcount.png
         3. charactercount.png
-    3. mentions.py
-        1. people_of_interest.png
+        4. comparisons.png
     4. test_machine.py
         1. test_machine_retweets.png
         2. test_machine_favorites.png
