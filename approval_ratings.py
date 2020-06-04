@@ -1,3 +1,14 @@
+"""
+CSE 163
+Jonathan Li and Chet Kruse
+
+approval_ratings.py is a python program that reads both the realdonaldtrump.csv
+and approval_polllist.csv datasets and performs pandas operations on them for
+cleaning. Using this cleaned data, it creates plots that show the
+relationships or lack thereof between certain aspects within the datasets. The
+program creates a total of one image containing 6 subplots. 
+"""
+
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -6,6 +17,13 @@ sns.set()
 
 
 def organize_ratings(ratings):
+    """
+    Takes in the ratings dataset as a parameter and returns a reformed dataset
+    that filters out low approval rating grades, sums the poll ratings by week,
+    and adds columns that rerpesent weighted scores for each single poll. The
+    polls are also filtered to dates within the time President Trump was
+    president.
+    """
     ratings = ratings[['subgroup', 'grade', 'samplesize',
                        'approve', 'disapprove']]
     ratings = ratings.sort_index()
@@ -31,6 +49,11 @@ def organize_ratings(ratings):
 
 
 def organize_tweets_ratings(tweets):
+    """
+    Takes in the tweets parameter and returns a reformed dataset that sums
+    the tweets' information by week. New columns that represent retweet
+    average and favorite average are added.
+    """
     tweets['count'] = 1
     tweets = tweets[['retweets', 'favorites', 'count']]
 
@@ -42,6 +65,12 @@ def organize_tweets_ratings(tweets):
 
 
 def create_plots(approval_ratings):
+    """
+    Takes in the reformed approval ratings dataset as a parameter with no
+    NAN values and creates an image with 6 subplots. Each comparing a
+    permutation of Approval/Disapproval rating per week with Weekly
+    Tweet Count/Favorites/Retweets.
+    """
     approval_ratings = approval_ratings.resample('W').mean()
 
     fig, [[ax1, ax2, ax3], [ax4, ax5, ax6]] = \

@@ -1,3 +1,11 @@
+"""
+CSE 163
+Jonathan Li and Chet Kruse
+
+mentions.py is a python program that reads in the realdonaldtrump.csv dataset. 
+Using this data, it creates one distribution plot and one bar plot. 
+"""
+
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -6,6 +14,11 @@ sns.set()
 
 
 def organize_tweets_language(tweets):
+    """
+    Takes in the tweets dataset as a parameter and creates an image with
+    distribution plots for popular mentions including Obama, Hillary,
+    CNN, and FOX.
+    """
     tweets = tweets.loc['2016-1-20':]
 
     # people_of_interest = ['obama', 'hillary', 'cnn', 'fox']
@@ -37,6 +50,11 @@ def organize_tweets_language(tweets):
 
 
 def create_barplot(tweets):
+    """
+    Takes in the tweets dataset as a parameter and creates a 2 barplots on
+    the same axes that displays the average amount of favorites and
+    retweets the respective tweet had per week.
+    """
     tweets = tweets.loc['2016-1-20':]
 
     persons_of_interest = ['obama', 'hillary', 'cnn', 'fox']

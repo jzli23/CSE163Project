@@ -1,3 +1,16 @@
+"""
+CSE 163
+Jonathan Li and Chet Kruse
+
+language.py is a program that focuses on answering the question
+"Do certain language characteristics differ between Donald Trump’s 
+popular tweets and his not so popular ones?" The program processes
+Donald Trump's grammar in his tweets, generates plots representing
+relationships and distributions, and creates a machine learning
+model that attempts to predict tweet success based off of grammar
+and tweet structure.
+"""
+
 import pandas as pd
 import seaborn as sns
 # import spacy
@@ -10,6 +23,12 @@ sns.set()
 
 
 def process_tweets(tweets, nlp):
+    """
+    Passes in original tweets dataset and the spacy
+    natural language processing tool. Returns a completed
+    file named "big_tweet_data.csv" that contains all information
+    pertaining to each tweet's structure and grammar usage.
+    """
     tweets = tweets.copy()
     tweets = tweets.loc['2016-1-20':]
     tweets['character count'] = tweets['content'].str.len()
@@ -28,6 +47,12 @@ def process_tweets(tweets, nlp):
 
 
 def spacy_p(tweet, nlp):
+    """
+    Passes in an individual tweet and the spacy
+    natural language processing tool. Returns a dictionary
+    that contains all important information regarding
+    the tweet's grammar usage.
+    """
     doc = nlp(tweet)
     grammar_var = {'word count': 0,
                    'NOUN': 0,
@@ -54,6 +79,11 @@ def spacy_p(tweet, nlp):
 
 
 def process_big_tweets(tweets):
+    """
+    Passes in an unprocessed big tweets dataset. Returns
+    an expanded big tweet dataset that includes improved
+    access to details about grammar usage and character count.
+    """
     tweets = tweets.copy()
     tweets['grammar_dict'] = \
         tweets['grammar_dict'].apply(lambda x: dict(eval(x)))
@@ -65,6 +95,14 @@ def process_big_tweets(tweets):
 
 
 def create_grammarplot(tweets):
+    """
+    Passes in the processed big tweets dataset. Saves
+    plots regarding the distribution of grammar usage,
+    distribution of character count and word count,
+    as well as the relationship plots between NOUN
+    percentage / character count / PROPER NOUN percentage
+    vs. favorites / retweets.
+    """
     tweets = tweets.copy()
     # To make the grammar plot
     fig, ax = plt.subplots(1, figsize=(20, 10))
@@ -73,7 +111,7 @@ def create_grammarplot(tweets):
     sns.kdeplot(data=tweets['VERB'], ax=ax)
     sns.kdeplot(data=tweets['ADJ'], ax=ax)
     sns.kdeplot(data=tweets['ADV'], ax=ax)
-    ax.set(xlabel='Part of Speech Percentage', ylabel='Kernal Density',
+    ax.set(xlabel='Part of Speech Percentage', ylabel='Probability Density',
            title='Distribution of Grammar Usage in Tweets')
 
     fig.savefig('CSE163Project/images/grammar.png')
@@ -81,13 +119,13 @@ def create_grammarplot(tweets):
     # To make the charactercount plot
     fig, ax = plt.subplots(1, figsize=(20, 10))
     sns.kdeplot(data=tweets['character count'], ax=ax, shade=True)
-    ax.set(xlabel='Tweet Character Count', ylabel='Kernal Density',
+    ax.set(xlabel='Tweet Character Count', ylabel='Probability Density',
            title='Distribution of Character Counts in Tweets')
 
     fig.savefig('CSE163Project/images/charactercount.png')
 
     # To make the comparisons plot
-    tweets = tweets.resample('w').mean()
+    tweets = tweets.resample('W').mean()
     fig, [[ax1, ax2, ax3], [ax4, ax5, ax6]] = \
         plt.subplots(nrows=2, ncols=3, figsize=(20, 10))
 
@@ -131,6 +169,13 @@ def create_grammarplot(tweets):
 
 
 def machine_learn_tweets(tweets):
+    """
+    Passes in the big tweets dataset. Creates a machine learning
+    model that attempts to predict both the favorites and retweets
+    of a particular post based off of grammar usage, sentence structure
+    and date of creation. Prints the Mean Average Values for both the training
+    and test tweets. 
+    """
     tweets = tweets.copy()
     tweets['year'] = tweets.index
     tweets['year'] = tweets['year'].map(lambda x: x.year)
