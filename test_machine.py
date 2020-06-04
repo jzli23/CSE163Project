@@ -20,6 +20,8 @@ def process_big_tweets(tweets):
 
 
 def test_machine(tweets, kind):
+    tweets = tweets.copy()
+    tweets['date'] = tweets['date'].apply(lambda x: int(x[0:4]))
     train = []
     test = []
     for i in range(2, 100):
@@ -43,15 +45,14 @@ def test_machine(tweets, kind):
     ax.set(xlabel='Max Depth Hyperparameter', ylabel='Mean Absolute Error',
            title=kind.upper() + ' Machine Learning Test')
 
-    fig.savefig('test_machine_' + kind + '.png')
+    fig.savefig('CSE163Project/images/test_machine_' + kind + '.png')
 
 
 def machine_learn_tweets(tweets, depth, kind):
-    tweets = tweets.copy()
     tweets = tweets[['favorites', 'retweets', 'word count',
                      'NOUN', 'PROPN', 'VERB', 'ADJ', 'ADV',
                      'character count', '! count',
-                     'hashtag count', '@ count']]
+                     'hashtag count', '@ count', 'date']]
     tweets.dropna()
     features = tweets.loc[:, (tweets.columns != 'retweets')
                           & (tweets.columns != 'favorites')]

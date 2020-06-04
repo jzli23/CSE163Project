@@ -74,29 +74,31 @@ def create_grammarplot(tweets):
     ax.set(xlabel='Part of Speech Percentage', ylabel='Kernal Density',
            title='Distribution of Grammar Usage in Tweets')
 
-    fig.savefig('grammar.png')
+    fig.savefig('CSE163Project/images/grammar.png')
 
     fig, ax = plt.subplots(1, figsize=(20, 10))
     sns.kdeplot(data=tweets['character count'], ax=ax, shade=True)
     ax.set(xlabel='Tweet Character Count', ylabel='Kernal Density',
            title='Distribution of Character Counts in Tweets')
 
-    fig.savefig('charactercount.png')
+    fig.savefig('CSE163Project/images/charactercount.png')
 
     fig, ax = plt.subplots(1, figsize=(20, 10))
     sns.kdeplot(data=tweets['word count'], ax=ax, shade=True)
     ax.set(xlabel='Tweet Word Count', ylabel='Kernal Density',
            title='Distribution of Word Counts in Tweets')
 
-    fig.savefig('wordcount.png')
+    fig.savefig('CSE163Project/images/wordcount.png')
 
 
 def machine_learn_tweets(tweets):
     tweets = tweets.copy()
+    tweets['year'] = tweets.index
+    tweets['year'] = tweets['year'].map(lambda x: x.year)
     tweets = tweets[['favorites', 'retweets', 'word count',
                      'NOUN', 'PROPN', 'VERB', 'ADJ', 'ADV',
                      'character count', '! count',
-                     'hashtag count', '@ count']]
+                     'hashtag count', '@ count', 'year']]
     tweets.dropna()
     features = tweets.loc[:, (tweets.columns != 'retweets')
                           & (tweets.columns != 'favorites')]
