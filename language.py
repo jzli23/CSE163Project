@@ -94,6 +94,7 @@ def create_grammarplot(tweets):
 def machine_learn_tweets(tweets):
     tweets = tweets.copy()
     tweets = tweets[['favorites', 'retweets', 'word count',
+                     'NOUN', 'PROPN', 'VERB', 'ADJ', 'ADV',
                      'character count', '! count',
                      'hashtag count', '@ count']]
     tweets.dropna()
@@ -103,7 +104,7 @@ def machine_learn_tweets(tweets):
     labels = tweets['retweets']
 
     features_train, features_test, labels_train, labels_test = \
-        train_test_split(features, labels, test_size=0.01)
+        train_test_split(features, labels, test_size=0.10)
 
     model = DecisionTreeRegressor(max_depth=50)
     model.fit(features_train, labels_train)
@@ -119,9 +120,9 @@ def machine_learn_tweets(tweets):
     labels = tweets['favorites']
 
     features_train, features_test, labels_train, labels_test = \
-        train_test_split(features, labels, test_size=0.01)
+        train_test_split(features, labels, test_size=0.2)
 
-    model = DecisionTreeRegressor(max_depth=50)
+    model = DecisionTreeRegressor(max_depth=15)
     model.fit(features_train, labels_train)
 
     train_predictions = model.predict(features_train)
@@ -134,14 +135,14 @@ def machine_learn_tweets(tweets):
 
 
 def main():
-    # tweets = pd.read_csv('CSE163Project/realdonaldtrump.csv',
+    # tweets = pd.read_csv('CSE163Project/data/realdonaldtrump.csv',
     #                      index_col='date', parse_dates=True)
 
     # This command generated big_tweet_data.csv. Takes 10 or so minutes.
     # nlp = spacy.load('en_core_web_sm')
     # process_tweets(tweets, nlp)
 
-    big_tweets = pd.read_csv('CSE163Project/big_tweet_data.csv',
+    big_tweets = pd.read_csv('CSE163Project/data/big_tweet_data.csv',
                              index_col='date', parse_dates=True)
     big_tweets = process_big_tweets(big_tweets)
     print('Tweet Retweet Median: ' + str(big_tweets['retweets'].median()))

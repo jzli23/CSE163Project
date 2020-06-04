@@ -89,15 +89,15 @@ def create_plots(approval_ratings):
             title='Disapproval Ratings per Week vs. Weekly Tweet Retweets',
             xlim=(40, 60), ylim=(5000, 35000))
 
-    fig.savefig('test.png')
+    fig.savefig('approval.png')
 
 
 def main():
-    tweets = pd.read_csv('CSE163Project/realdonaldtrump.csv',
+    tweets = pd.read_csv('CSE163Project/data/realdonaldtrump.csv',
                          index_col='date', parse_dates=True)
-    # ratings_extra = pd.read_csv('CSE163Project/approval_topline.csv',
+    # ratings_extra = pd.read_csv('CSE163Project/data/approval_topline.csv',
     #                             index_col='timestamp', parse_dates=True)
-    ratings = pd.read_csv('CSE163Project/approval_polllist.csv',
+    ratings = pd.read_csv('CSE163Project/data/approval_polllist.csv',
                           index_col='enddate', parse_dates=True)
 
     ratings = organize_ratings(ratings)
