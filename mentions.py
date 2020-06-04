@@ -80,7 +80,7 @@ def create_barplot(tweets):
 
 
 def main():
-    tweets = pd.read_csv('CSE_163_Project/realdonaldtrump.csv',
+    tweets = pd.read_csv('CSE163Project/realdonaldtrump.csv',
                          index_col='date', parse_dates=True)
 
     organize_tweets_language(tweets)

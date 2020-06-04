@@ -134,14 +134,14 @@ def machine_learn_tweets(tweets):
 
 
 def main():
-    # tweets = pd.read_csv('CSE_163_Project/realdonaldtrump.csv',
+    # tweets = pd.read_csv('CSE163Project/realdonaldtrump.csv',
     #                      index_col='date', parse_dates=True)
 
     # This command generated big_tweet_data.csv. Takes 10 or so minutes.
     # nlp = spacy.load('en_core_web_sm')
     # process_tweets(tweets, nlp)
 
-    big_tweets = pd.read_csv('CSE_163_Project/big_tweet_data.csv',
+    big_tweets = pd.read_csv('CSE163Project/big_tweet_data.csv',
                              index_col='date', parse_dates=True)
     big_tweets = process_big_tweets(big_tweets)
     print('Tweet Retweet Median: ' + str(big_tweets['retweets'].median()))
