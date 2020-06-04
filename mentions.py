@@ -2,6 +2,8 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+sns.set()
+
 
 def organize_tweets_language(tweets):
     tweets = tweets.loc['2016-1-20':]

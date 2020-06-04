@@ -6,6 +6,8 @@ from sklearn.metrics import mean_absolute_error
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import train_test_split
 
+sns.set()
+
 
 def process_tweets(tweets, nlp):
     tweets = tweets.copy()
@@ -132,8 +134,6 @@ def machine_learn_tweets(tweets):
 
 
 def main():
-    print('cool')
-
     # tweets = pd.read_csv('CSE_163_Project/realdonaldtrump.csv',
     #                      index_col='date', parse_dates=True)
 
