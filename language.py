@@ -65,6 +65,8 @@ def process_big_tweets(tweets):
 
 
 def create_grammarplot(tweets):
+    tweets = tweets.copy()
+    # To make the grammar plot
     fig, ax = plt.subplots(1, figsize=(20, 10))
     sns.kdeplot(data=tweets['PROPN'], ax=ax)
     sns.kdeplot(data=tweets['NOUN'], ax=ax)
@@ -74,21 +76,58 @@ def create_grammarplot(tweets):
     ax.set(xlabel='Part of Speech Percentage', ylabel='Kernal Density',
            title='Distribution of Grammar Usage in Tweets')
 
-    fig.savefig('CSE163Project/images/grammar.png')
+    fig.savefig('grammar.png')
 
+    # To make the charactercount plot
     fig, ax = plt.subplots(1, figsize=(20, 10))
     sns.kdeplot(data=tweets['character count'], ax=ax, shade=True)
     ax.set(xlabel='Tweet Character Count', ylabel='Kernal Density',
            title='Distribution of Character Counts in Tweets')
 
-    fig.savefig('CSE163Project/images/charactercount.png')
+    fig.savefig('charactercount.png')
 
-    fig, ax = plt.subplots(1, figsize=(20, 10))
-    sns.kdeplot(data=tweets['word count'], ax=ax, shade=True)
-    ax.set(xlabel='Tweet Word Count', ylabel='Kernal Density',
-           title='Distribution of Word Counts in Tweets')
+    # To make the comparisons plot
+    tweets = tweets.resample('w').mean()
+    fig, [[ax1, ax2, ax3], [ax4, ax5, ax6]] = \
+        plt.subplots(nrows=2, ncols=3, figsize=(20, 10))
 
-    fig.savefig('CSE163Project/images/wordcount.png')
+    sns.regplot(x='NOUN', y='favorites', marker='+', scatter_kws={"s": 10},
+                data=tweets, ax=ax1)
+    ax1.set(xlabel='Mean Noun Usage Percent per Week',
+            ylabel='Mean Favorites per Week',
+            title='Mean Noun Usage Percent vs Mean Favorites per Week')
+
+    sns.regplot(x='character count', y='favorites', marker='+', scatter_kws={"s": 10},
+                data=tweets, ax=ax2)
+    ax2.set(xlabel='Mean Character Count per Week',
+            ylabel='Mean Favorites per Week',
+            title='Mean Character Count vs Mean Favorites per Week')
+
+    sns.regplot(x='PROPN', y='favorites', marker='+', scatter_kws={"s": 10},
+                data=tweets, ax=ax3)
+    ax3.set(xlabel='Mean Proper Noun Usage Percent per Week',
+            ylabel='Mean Favorites per Week',
+            title='Mean Proper Noun Usage Percent vs Mean Favorites per Week')
+
+    sns.regplot(x='NOUN', y='retweets', marker='+', scatter_kws={"s": 10},
+                data=tweets, ax=ax4)
+    ax4.set(xlabel='Mean Noun Usage Percent per Week',
+            ylabel='Mean Retweets per Week',
+            title='Mean Noun Usage Percent vs Mean Retweets per Week')
+
+    sns.regplot(x='character count', y='retweets', marker='+', scatter_kws={"s": 10},
+                data=tweets, ax=ax5)
+    ax5.set(xlabel='Mean Character Count per Week',
+            ylabel='Mean Retweets per Week',
+            title='Mean Character Count vs Mean Retweets per Week')
+
+    sns.regplot(x='PROPN', y='retweets', marker='+', scatter_kws={"s": 10},
+                data=tweets, ax=ax6)
+    ax6.set(xlabel='Proper Noun Usage Percent per Week',
+            ylabel='Mean Retweets per Week',
+            title='Mean Proper Noun Usage Percent vs Mean Retweets per Week')
+
+    fig.savefig('comparisons.png')
 
 
 def machine_learn_tweets(tweets):
