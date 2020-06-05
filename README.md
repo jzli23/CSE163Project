@@ -30,8 +30,7 @@
     4. test_machine.py
         1. test_machine_retweets.png
         2. test_machine_favorites.png
-6. **WARNING FOR MAC USERS**: It seems that mac users have an issue reading in CSV files with the given code. To fix this, delete the "CSE163Project/" portion from the path to all of the read_csv lines of code.
-7. If you want to generate another _big_tweet_data_ dataset, uncomment the _"import spacy"_ and _lines 138-143_ in **language.py**.
+6. If you want to generate another _big_tweet_data_ dataset, uncomment the _"import spacy"_ and _lines 138-143_ in **language.py**.
 
 
 ![Good Luck Image](/Good_luck.jpg)

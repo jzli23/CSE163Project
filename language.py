@@ -111,7 +111,7 @@ def create_grammarplot(tweets):
     sns.kdeplot(data=tweets['VERB'], ax=ax)
     sns.kdeplot(data=tweets['ADJ'], ax=ax)
     sns.kdeplot(data=tweets['ADV'], ax=ax)
-    ax.set(xlabel='Part of Speech Percentage', ylabel='Probability Density',
+    ax.set(xlabel='Part of Speech Ratio', ylabel='Probability Density',
            title='Distribution of Grammar Usage in Tweets')
 
     fig.savefig('images/grammar.png')
@@ -131,9 +131,9 @@ def create_grammarplot(tweets):
 
     sns.regplot(x='NOUN', y='favorites', marker='+', scatter_kws={"s": 10},
                 data=tweets, ax=ax1)
-    ax1.set(xlabel='Mean Noun Usage Percent per Week',
+    ax1.set(xlabel='Mean Noun Usage Ratio per Week',
             ylabel='Mean Favorites per Week',
-            title='Mean Noun Usage Percent vs Mean Favorites per Week')
+            title='Mean Noun Usage Ratio vs Mean Favorites per Week')
 
     sns.regplot(x='character count', y='favorites', marker='+',
                 scatter_kws={"s": 10}, data=tweets, ax=ax2)
@@ -143,15 +143,15 @@ def create_grammarplot(tweets):
 
     sns.regplot(x='PROPN', y='favorites', marker='+', scatter_kws={"s": 10},
                 data=tweets, ax=ax3)
-    ax3.set(xlabel='Mean Proper Noun Usage Percent per Week',
+    ax3.set(xlabel='Mean Proper Noun Usage Ratio per Week',
             ylabel='Mean Favorites per Week',
-            title='Mean Proper Noun Usage Percent vs Mean Favorites per Week')
+            title='Mean Proper Noun Usage Ratio vs Mean Favorites per Week')
 
     sns.regplot(x='NOUN', y='retweets', marker='+', scatter_kws={"s": 10},
                 data=tweets, ax=ax4)
-    ax4.set(xlabel='Mean Noun Usage Percent per Week',
+    ax4.set(xlabel='Mean Noun Usage Ratio per Week',
             ylabel='Mean Retweets per Week',
-            title='Mean Noun Usage Percent vs Mean Retweets per Week')
+            title='Mean Noun Usage Ratio vs Mean Retweets per Week')
 
     sns.regplot(x='character count', y='retweets', marker='+',
                 scatter_kws={"s": 10}, data=tweets, ax=ax5)
@@ -161,9 +161,10 @@ def create_grammarplot(tweets):
 
     sns.regplot(x='PROPN', y='retweets', marker='+', scatter_kws={"s": 10},
                 data=tweets, ax=ax6)
-    ax6.set(xlabel='Proper Noun Usage Percent per Week',
+    ax6.set(xlabel='Proper Noun Usage Ratio per Week',
             ylabel='Mean Retweets per Week',
-            title='Mean Proper Noun Usage Percent vs Mean Retweets per Week')
+            title='Mean Proper Noun Usage Ratio vs Mean Retweets per Week',
+            xlim=(0.08, 0.22), ylim=(0, 35000))
 
     fig.savefig('images/comparisons.png')
 
