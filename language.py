@@ -43,7 +43,7 @@ def process_tweets(tweets, nlp):
 
     tweets['grammar_dict'] = tweets['content'].apply(lambda x: spacy_p(x, nlp))
 
-    tweets.to_csv('big_tweet_data.csv')
+    tweets.to_csv('data/big_tweet_data.csv')
 
 
 def spacy_p(tweet, nlp):
@@ -114,7 +114,7 @@ def create_grammarplot(tweets):
     ax.set(xlabel='Part of Speech Percentage', ylabel='Probability Density',
            title='Distribution of Grammar Usage in Tweets')
 
-    fig.savefig('CSE163Project/images/grammar.png')
+    fig.savefig('images/grammar.png')
 
     # To make the charactercount plot
     fig, ax = plt.subplots(1, figsize=(20, 10))
@@ -122,7 +122,7 @@ def create_grammarplot(tweets):
     ax.set(xlabel='Tweet Character Count', ylabel='Probability Density',
            title='Distribution of Character Counts in Tweets')
 
-    fig.savefig('CSE163Project/images/charactercount.png')
+    fig.savefig('images/charactercount.png')
 
     # To make the comparisons plot
     tweets = tweets.resample('W').mean()
@@ -165,7 +165,7 @@ def create_grammarplot(tweets):
             ylabel='Mean Retweets per Week',
             title='Mean Proper Noun Usage Percent vs Mean Retweets per Week')
 
-    fig.savefig('CSE163Project/images/comparisons.png')
+    fig.savefig('images/comparisons.png')
 
 
 def machine_learn_tweets(tweets):
@@ -221,14 +221,14 @@ def machine_learn_tweets(tweets):
 
 
 def main():
-    # tweets = pd.read_csv('CSE163Project/data/realdonaldtrump.csv',
+    # tweets = pd.read_csv('data/realdonaldtrump.csv',
     #                      index_col='date', parse_dates=True)
 
     # This command generated big_tweet_data.csv. Takes 10 or so minutes.
     # nlp = spacy.load('en_core_web_sm')
     # process_tweets(tweets, nlp)
 
-    big_tweets = pd.read_csv('CSE163Project/data/big_tweet_data.csv',
+    big_tweets = pd.read_csv('data/big_tweet_data.csv',
                              index_col='date', parse_dates=True)
     big_tweets = process_big_tweets(big_tweets)
     print('Tweet Retweet Median: ' + str(big_tweets['retweets'].median()))

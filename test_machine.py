@@ -67,7 +67,7 @@ def test_machine(tweets, kind):
     ax.set(xlabel='Max Depth Hyperparameter', ylabel='Mean Absolute Error',
            title=kind.upper() + ' Machine Learning Test')
 
-    fig.savefig('CSE163Project/images/test_machine_' + kind + '.png')
+    fig.savefig('images/test_machine_' + kind + '.png')
 
 
 def machine_learn_tweets(tweets, depth, kind):
@@ -103,7 +103,7 @@ def machine_learn_tweets(tweets, depth, kind):
 
 
 def main():
-    big_tweets = pd.read_csv('CSE163Project/data/big_tweet_data.csv')
+    big_tweets = pd.read_csv('data/big_tweet_data.csv')
     big_tweets = process_big_tweets(big_tweets)
     test_machine(big_tweets, 'retweets')
     test_machine(big_tweets, 'favorites')

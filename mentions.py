@@ -46,7 +46,7 @@ def organize_tweets_language(tweets):
            title='Favorites Distribution by Group')
     plt.legend(loc='upper right', labels=['Obama', 'Hillary', 'CNN', 'FOX'])
 
-    fig.savefig('people_of_interest.png')
+    fig.savefig('images/people_of_interest.png')
 
 
 def create_barplot(tweets):
@@ -94,11 +94,11 @@ def create_barplot(tweets):
             ylabel='Average Number of Retweets',
             title='Group\'s Average Number of Retweets')
 
-    fig.savefig('barplots.png')
+    fig.savefig('images/barplots.png')
 
 
 def main():
-    tweets = pd.read_csv('CSE163Project/data/realdonaldtrump.csv',
+    tweets = pd.read_csv('data/realdonaldtrump.csv',
                          index_col='date', parse_dates=True)
 
     organize_tweets_language(tweets)
