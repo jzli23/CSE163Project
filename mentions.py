@@ -42,7 +42,7 @@ def organize_tweets_language(tweets):
     sns.kdeplot(data=fox_data, ax=ax, clip=(0, 300000), legend=False)
 
     ax.set(xlabel='Tweet Favorites',
-           ylabel='Kernal Density',
+           ylabel='Probability Density',
            title='Favorites Distribution by Group')
     plt.legend(loc='upper right', labels=['Obama', 'Hillary', 'CNN', 'FOX'])
 

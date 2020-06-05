@@ -124,6 +124,14 @@ def create_grammarplot(tweets):
 
     fig.savefig('images/charactercount.png')
 
+    # To make wordcount plot
+    fig, ax = plt.subplots(1, figsize=(20, 10))
+    sns.kdeplot(data=tweets['word count'], ax=ax, shade=True)
+    ax.set(xlabel='Tweet Word Count', ylabel='Probability Density',
+           title='Distribution of Character Counts in Tweets')
+
+    fig.savefig('images/wordcount.png')
+
     # To make the comparisons plot
     tweets = tweets.resample('W').mean()
     fig, [[ax1, ax2, ax3], [ax4, ax5, ax6]] = \
