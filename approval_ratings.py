@@ -12,7 +12,6 @@ program creates a total of one image containing 6 subplots.
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-
 sns.set()
 
 
@@ -137,3 +136,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
