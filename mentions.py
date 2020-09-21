@@ -9,7 +9,6 @@ Using this data, it creates one distribution plot and one bar plot.
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-
 sns.set()
 
 
