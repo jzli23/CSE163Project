@@ -34,4 +34,4 @@
 
 
 
-![Good Luck Image](/Good_luck.jpg)
+![Good Luck Image](Good_Luck.jpg)
